@@ -1,8 +1,8 @@
-# Example 1
+# Example 2
 
-This is a container built from scratch with a single static golang binary inside.
+This is a container built from scratch with a static golang binary inside (plus a secret file which should not be baked into the image).
 
-You can see what it builds at https://hub.docker.com/layers/aar1/hello-service/latest/images/sha256-a655bcb5f3f9aad168144cbef835413b3b03295dda98de9d2d5656998619e37e?context=explore
+You can see what it builds at https://hub.docker.com/layers/aar1/hash-service/latest/images/sha256-080862ad6ad33d97dd1be683ebf6954e83a9f7b4d0d9010828e37c4a753184e7?tab=layers
 
 Notice how only the contents of the scratch container end up visible on DockerHub. The builder container layers and commands are not part of the final image.
 
@@ -12,7 +12,7 @@ Example usage:
 
 1. Set the DOCKERHUB_USER_NAME to your DockerHub user name, e.g. `export DOCKERHUB_USER_NAME=myuser`.
 2. Run `make build` to build the image.
-3. Run `make run` to run the image and test it, e.g. `curl http://0.0.0.0:8080/ping`
+3. Run `make run` to run the image and test it, e.g. `curl http://0.0.0.0:8080/ping?parameter=12345`. **The output is based on a hash of the URL parameters and some secrets, so try different parameter values to get different outputs.**
 4. Run `make push` to push the image to DockerHub. This will fail if you didn't set the correct user name in step 1, or if you haven't first run `docker login`.
 
 ## Health Warning
